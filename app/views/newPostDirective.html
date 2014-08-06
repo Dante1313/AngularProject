@@ -1,0 +1,27 @@
+<div class="popup-overlay" ng-show="isShowPopup"></div>
+<div class="popup-new-post" ng-show="isShowPopup">
+    <form class="new-post-form" name="newPostForm" ng-submit="addNewPost(newPostForm.$valid)" novalidate>
+        <h4>Add new post</h4>
+        <div class="form-group" ng-class="{ 'has-error' : newPostForm.title.$invalid && !newPostForm.title.$pristine }">
+             <label for="new-post-title">Title:</label>
+            <input ng-model="newPost.title" name="title" class="form-control" type="text" id="new-post-title" required>
+            <p ng-show="newPostForm.title.$invalid && !newPostForm.title.$pristine" class="help-block">Title is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : newPostForm.image.$invalid && !newPostForm.image.$pristine }">
+            <label for="new-post-image">Image url:</label>
+            <input ng-model="newPost.image" name="image" class="form-control" type="text" id="new-post-image">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : newPostForm.text.$invalid && !newPostForm.text.$pristine }">
+            <label for="new-post-text">Text:</label>
+            <textarea ng-model="newPost.text" name="text" class="form-control" id="new-post-text" required></textarea>
+            <p ng-show="newPostForm.text.$invalid && !newPostForm.text.$pristine" class="help-block">Text is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : newPostForm.author.$invalid && !newPostForm.author.$pristine }">
+            <label for="new-post-author">Author:</label>
+            <input ng-model="newPost.author" name="author" class="form-control" type="text" id="new-post-author" required>
+            <p ng-show="newPostForm.author.$invalid && !newPostForm.author.$pristine" class="help-block">Author is required.</p>
+        </div>        
+        <button ng-disabled="newPostForm.$invalid" type="submit" class="btn btn-lg btn-success">Add post</button>
+        <button class="btn btn-lg navbar-right" ng-click="hidePopup()">Close</button>
+    </form>    
+</div>
