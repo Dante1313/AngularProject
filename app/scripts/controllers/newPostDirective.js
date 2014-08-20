@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularProjectApp')
-  .directive('newPost',['$filter',function ($filter) {
+  .directive('newPost',['$filter','blogPostService',function ($filter,blogPostService) {
       return {
           restrict: 'E',
           templateUrl: '../views/newPostDirective.html',
@@ -12,17 +12,32 @@ angular.module('angularProjectApp')
             };
             $scope.hidePopup = function() {
                 $scope.isShowPopup = false;
+                $scope.newPost = {};
             };  
             $scope.newPost = {};
             $scope.addNewPost = function(isValid){
                 
                 if (isValid) {
-                    $scope.newPost.date = $scope.getCurrentDate();
-                    $scope.posts.push($scope.newPost);
-                    $scope.newPost = {};
-                    $scope.hidePopup(); 
+                    if($scope.newPost._id) {
+                        blogPostService.update({_id: $scope.post._id},$scope.post,function(){
+                            $scope.newPost = {};
+                            $scope.hidePopup();
+                            $scope.posts = blogPostService.query();
+                        });  
+                    } else {
+                        $scope.newPost.date = $scope.getCurrentDate();
+                        blogPostService.save($scope.newPost,function(){
+                            $scope.newPost = {};
+                            $scope.hidePopup();
+                            $scope.posts = blogPostService.query();
+                        });  
+                    }
+                      
                 }
-
+            };
+              
+            $scope.editPost = function(post){
+  
             };
 
             $scope.getCurrentDate = function(){

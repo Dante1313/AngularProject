@@ -8,8 +8,21 @@
  * Controller of the angularProjectApp
  */
 angular.module('angularProjectApp')
-  .controller('MainCtrl',['$scope','$filter', function ($scope,$filter) {
-    $scope.posts = posts;    
+  .controller('MainCtrl',['$scope','$filter','blogPostService', function ($scope,$filter,blogPostService) { 
+    $scope.post = new blogPostService();  
+    $scope.posts = blogPostService.query();
+      
+    $scope.editPostForm = function(post){
+        $scope.showPopup();
+        $scope.post = post;
+        $scope.newPost = $scope.post;
+    };
+      
+    $scope.deletePost = function(postId){
+        blogPostService.delete({_id: postId},function(){
+             $scope.posts = blogPostService.query();
+        });
+    }
   }]);
 
 var posts = [

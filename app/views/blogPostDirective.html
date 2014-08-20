@@ -3,4 +3,6 @@
    <img ng-show="post.image" ng-src="{{post.image}}" alt="{{post.title}}">
    <p>{{post.text}}</p>
    <p class="author"><span>Posted: {{post.date}}</span> - <span>Author: {{post.author}}</span></p>
+   <button class="btn btn-warning btn-sm" ng-click="editPostForm(post)">Edit post</button>
+   <button class="btn btn-danger btn-sm" ng-click="deletePost(post._id)">Delete post</button>
 </div>

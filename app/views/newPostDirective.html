@@ -21,7 +21,7 @@
             <input ng-model="newPost.author" name="author" class="form-control" type="text" id="new-post-author" required>
             <p ng-show="newPostForm.author.$invalid && !newPostForm.author.$pristine" class="help-block">Author is required.</p>
         </div>        
-        <button ng-disabled="newPostForm.$invalid" type="submit" class="btn btn-lg btn-success">Add post</button>
+        <button ng-disabled="newPostForm.$invalid" type="submit" class="btn btn-lg btn-success">Submit post</button>
         <button class="btn btn-lg navbar-right" ng-click="hidePopup()">Close</button>
     </form>    
 </div>
